@@ -1,4 +1,15 @@
 services:
   - docker
 
-script: docker build -t danysk/linux-didattica .
+env:
+  global:
+    - TZ=UTC
+    - IMAGE_NAME=linux-didattica
+
+script:
+  - export TAG="$(git describe || git log -n1 --date=format:'%Y-%m-%dT%H%M%S' --format=%cd)$(date +%Y-%m-%d_%H%M)"
+  - docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$TAG .
+
+deploy:
+  - docker push $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME:latest
