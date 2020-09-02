@@ -8,7 +8,7 @@ env:
 
 script:
   - export TAG="$(git describe || git log -n1 --date=format:'%Y-%m-%dT%H%M%S' --format=%cd)$(date +%Y-%m-%d_%H%M)"
-  - docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$TAG .
+  - travis_wait 45 docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$TAG .
 
 deploy:
   - docker push $IMAGE_NAME:$TAG
