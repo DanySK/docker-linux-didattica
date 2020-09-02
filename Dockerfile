@@ -1,28 +1,28 @@
-FROM manjarolinux/base
-RUN pacman -Sy --noconfirm gnupg archlinux-keyring manjaro-keyring
-RUN rm -fr /etc/pacman.d/gnupg
-RUN pacman-key --init
-RUN pacman-key --populate archlinux manjaro
-RUN pacman -Sc --noconfirm
-RUN pacman -Syu --noconfirm && pacman -Sc --noconfirm
-RUN pacman -S --needed git fakeroot sudo nano binutils make gcc gettext gawk pigz pbzip2 --noconfirm && pacman -Sc --noconfirm
-## CREATE A NORMAL USER FOR YAY
-RUN useradd builduser -m
-# Delete the buildusers password
-RUN passwd -d builduser
-# Allow the builduser passwordless sudo
-RUN printf 'root ALL=(ALL) ALL\n' | tee -a /etc/sudoers
-RUN printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
-# Use parallel compression
-COPY makepkg.conf /etc/makepkg.conf
-## INSTALL YAY
-COPY install_yay.sh /usr/bin/install_yay.sh
-RUN chmod +x /usr/sbin/install_yay.sh
-RUN sudo -u builduser install_yay.sh
-# Normal user operations, system installation
-COPY packages /etc/image/packages
-RUN cat /etc/image/packages
-RUN for package in $(cat /etc/image/packages); do sudo -u builduser yay -Syu --needed --noconfirm $package && yay -Sc --noconfirm; done
+FROM danysk/manjaro-with-zsh
+# Easy Game
+RUN yay-install code
+RUN yay-install curl
+RUN yay-install gradle
+RUN yay-install hugo
+RUN yay-install intellij-idea-community-edition
+RUN yay-install jdk-openj9-bin
+RUN yay-install jdk-openjdk
+RUN yay-install jdk11-openjdk
+RUN yay-install jdk8-openjdk
+RUN yay-install kotlin
+RUN yay-install python-matplotlib
+RUN yay-install python-numpy
+RUN yay-install python-xarray
+RUN yay-install ruby
+RUN yay-install ruby-ffi
+RUN yay-install ruby-irb
+RUN yay-install ruby-rdoc
+RUN yay-install ruby-sass
+RUN yay-install rubygems
+RUN yay-install scala
+RUN yay-install spyder
+# From AUR
+RUN yay-install diff eclipse-java
 # System configuration
 RUN archlinux-java set java-11-openjdk
 RUN gem install bundler jekyll travis
