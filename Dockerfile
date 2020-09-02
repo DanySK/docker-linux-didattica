@@ -5,8 +5,7 @@ RUN pacman-key --init
 RUN pacman-key --populate archlinux manjaro
 RUN pacman -Sc --noconfirm
 RUN pacman -Syu --noconfirm && pacman -Sc --noconfirm
-RUN pacman -S git fakeroot nano binutils make gcc gettext gawk pigz pbzip2 --noconfirm && pacman -Sc --noconfirm
-RUN pacman -S --needed --noconfirm sudo
+RUN pacman -S --needed git fakeroot sudo nano binutils make gcc gettext gawk pigz pbzip2 --noconfirm && pacman -Sc --noconfirm
 ## CREATE A NORMAL USER FOR YAY
 RUN useradd builduser -m
 # Delete the buildusers password
@@ -23,7 +22,7 @@ RUN sudo -u builduser install_yay.sh
 # Normal user operations, system installation
 COPY packages /etc/image/packages
 RUN cat /etc/image/packages
-RUN for package in $(cat /etc/image/packages); do sudo -u builduser yay -Syu --noconfirm $package && yay -Sc --noconfirm; done
+RUN for package in $(cat /etc/image/packages); do sudo -u builduser yay -Syu --needed --noconfirm $package && yay -Sc --noconfirm; done
 # System configuration
 RUN archlinux-java set java-11-openjdk
 RUN gem install bundler jekyll travis
