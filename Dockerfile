@@ -4,6 +4,13 @@ RUN yay-install gradle
 RUN yay-install intellij-idea-community-edition
 RUN yay-install spyder
 # From AUR
-RUN yay-install diff eclipse-java
+RUN yay-install diffutils
+RUN pacman-key --keyserver hkp://keyserver.ubuntu.com -r 3056513887B78AEB 8A9E14A07010F7E3
+RUN pacman-key --lsign-key 3056513887B78AEB
+RUN pacman-key --lsign-key 8A9E14A07010F7E3
+COPY chaotic-aur-config /etc/pacman.d/chaotic-aur-config
+RUN cat /etc/pacman.d/chaotic-aur-config >> /etc/pacman.conf
+RUN yay-install eclipse-java
 # System configuration
+RUN eclipse -nosplash -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/2020-09/,http://protelis-eclipse.surge.sh/,http://www.acanda.ch/eclipse-pmd/release/latest/,https://checkstyle.org/eclipse-cs/update,https://spotbugs.github.io/eclipse/ -installIU protelis.parser.feature.feature.group,ch.acanda.eclipse.pmd.feature.feature.group,net.sf.eclipsecs.feature.group,com.github.spotbugs.plugin.eclipse.feature.group
 CMD zsh
