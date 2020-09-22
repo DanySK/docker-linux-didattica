@@ -20,7 +20,7 @@ On a cmd/powershell run `ipconfig` and find your IP address.
 ```bash
 docker pull danysk/linux-didattica
 set-variable -name DISPLAY -value <YOUR_IP>:0.0
-docker run --rm <WHERE_TO_LOCALLY_PERSIST>:/home/user -e DISPLAY=$DISPLAY -it danysk/linux-didattica
+docker run --rm "<WHERE_TO_LOCALLY_PERSIST>:/home/user" --volume="$HOME/.Xauthority:/.Xauthority:rw" -e DISPLAY=$DISPLAY -it danysk/linux-didattica
 ```
 
 ## Run on Mac OS X
