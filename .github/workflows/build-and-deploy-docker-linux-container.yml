@@ -1,0 +1,36 @@
+name: Build container image and deploy on dockerhub
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * SAT'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      OS: ${{ matrix.os }}
+      JDK_VERSION: ${{ matrix.version }}
+      JDK_TYPE: ${{ matrix.vm }}
+      IMAGE_NAME: danysk/${{ matrix.vm }}-${{ matrix.version || 'latest' }}-${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Compute name
+        env:
+          SLUG: ${{ github.repository }}
+        run: echo "IMAGE_NAME=$(echo $SLUG | tr '[:upper:]' '[:lower:]')" >> $GITHUB_PATH
+      - name: Compute tag
+        env:
+          TZ: UTC
+        run: echo "TAG=$(git describe || git log -n1 --date=format:'%Y-%m-%dT%H%M%S' --format=%cd)$(date +%Y-%m-%d_%H%M)" >> $GITHUB_PATH
+      - name: Build Image
+        run: docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$TAG" .
+      - name: Login to Docker Hub
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: danysk
+        run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
+      - name: Deploy Image
+        if: ${{ github.event_name != 'pull_request' }}
+        run: docker push $IMAGE_NAME:$TAG
