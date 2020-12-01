@@ -8,10 +8,6 @@ on:
 jobs:
   Build-And-Deploy-Container:
     runs-on: ubuntu-latest
-    env:
-      OS: ${{ matrix.os }}
-      JDK_VERSION: ${{ matrix.version }}
-      JDK_TYPE: ${{ matrix.vm }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
