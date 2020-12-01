@@ -30,6 +30,7 @@ jobs:
           echo docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$TAG" .
           docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$TAG" .
       - name: Login to Docker Hub
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: danysk
