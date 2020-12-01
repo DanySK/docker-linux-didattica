@@ -12,7 +12,6 @@ jobs:
       OS: ${{ matrix.os }}
       JDK_VERSION: ${{ matrix.version }}
       JDK_TYPE: ${{ matrix.vm }}
-      IMAGE_NAME: danysk/${{ matrix.vm }}-${{ matrix.version || 'latest' }}-${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
