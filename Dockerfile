@@ -1,4 +1,4 @@
-FROM danysk/manjaro-programming-cli-tools:22.20210830.1543
+FROM danysk/docker-manjaro-programming-cli-tools:22.20210830.1543
 RUN yay-install code
 RUN yay-install gradle
 RUN yay-install intellij-idea-community-edition
