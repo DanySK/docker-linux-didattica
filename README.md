@@ -5,6 +5,9 @@ VMs drain too many resources,
 some students have Linux/Mac PCS...
 So I adopted docker
 
+* Link to the [docker hub page](https://hub.docker.com/repository/docker/danysk/docker-linux-didattica)
+* Quickly pull it via: `docker pull danysk/docker-linux-didattica:latest`
+
 ## Run on linux
 
 ```bash
