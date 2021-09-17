@@ -24,10 +24,15 @@ jobs:
           IMAGE_NAME="$(echo $SLUG | tr '[:upper:]' '[:lower:]')"
           echo IMAGE_NAME="$IMAGE_NAME"
           echo IMAGE_NAME="$IMAGE_NAME" >> $GITHUB_ENV
+      - name: Compute version
+        run: |
+          VERSION="$(git rev-list --all --count).$(date +%Y%m%d.%H%M)"
+          echo VERSION="$VERSION"
+          echo VERSION="$VERSION" >> $GITHUB_ENV
       - name: Build Image
         run: |
-          echo docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$(git rev-list --all --count).$(date +%Y%m%d.%H%M)" .
-          docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$(git rev-list --all --count).$(date +%Y%m%d.%H%M)" .
+          echo docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$VERSION" .
+          docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$VERSION" .
       - name: Login to Docker Hub
         if: ${{ github.event_name != 'pull_request' }}
         env:
@@ -37,3 +42,14 @@ jobs:
       - name: Deploy Image
         if: ${{ github.event_name != 'pull_request' }}
         run: docker push --all-tags $IMAGE_NAME
+      - name: Run container
+        if: ${{ github.event_name != 'pull_request' }}
+        run: docker run --name wsl "$IMAGE_NAME:$VERSION"
+      - name: Export container into tarball
+        run: docker export --output="wsl.tar" wsl
+      - name: Compress the tarball
+        run: zstd wsl.tar -o wsl.tar.zstd && rm wsl.tar
+      - name: Split the tarball into manageable chunks
+        run: split -b 2g wsl.tar.zstd wsl.tar.zstd.
+  
+        
