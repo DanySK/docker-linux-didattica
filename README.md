@@ -33,6 +33,7 @@ docker run --rm "<WHERE_TO_LOCALLY_PERSIST>:/home/user" --volume="$HOME/.Xauthor
   * Bash: `cat *.tar.zstd.* > wsl.tar.zstd`
   * Cmd: `copy /b wsl.zstd.01 + wsl.zstd.02 + wsl.zstd.03 wsl.tar.zstd` (put all files)
 * Decompress the tarball into a `wsl.tar` file
+  * If you have [Z-standard](http://facebook.github.io/zstd/) installed, simply: `unzstd wsl.tar.zstd`
 * Import in WSL2:
   * `wsl --import didattica PATH_TO_THE_WLS_FILE_SYSTEM wsl.tar --version 2`
 
