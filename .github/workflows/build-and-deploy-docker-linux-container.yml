@@ -51,5 +51,12 @@ jobs:
         run: zstd wsl.tar -o wsl.tar.zstd && rm wsl.tar
       - name: Split the tarball into manageable chunks
         run: split -b 2g wsl.tar.zstd wsl.tar.zstd.
-  
-        
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          prerelease: false
+          files: "wsl.tar.zstd.*"
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          fail_on_unmatched_files: true
