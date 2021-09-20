@@ -1,10 +1,13 @@
 name: Build container image and deploy on dockerhub
 on:
+  pull_request:
   push:
     tags: '*'
     branches-ignore:
       - 'renovate**'
-  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'renovate.json'
     
 jobs:
   Build-And-Deploy-Container:
