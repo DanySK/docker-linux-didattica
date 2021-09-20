@@ -1,6 +1,9 @@
 name: Build container image and deploy on dockerhub
 on:
   push:
+    tags: '*'
+    branches-ignore:
+      - 'renovate**'
   pull_request:
     
 jobs:
