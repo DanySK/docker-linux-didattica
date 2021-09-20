@@ -52,7 +52,7 @@ jobs:
       - name: Compress the tarball
         run: zstd --no-progress wsl.tar -o wsl.tar.zstd && rm wsl.tar
       - name: Split the tarball into manageable chunks
-        run: split -d --bytes=2147483647 wsl.tar.zstd wsl.tar.zstd.
+        run: split -d -b 1G wsl.tar.zstd wsl.tar.zstd.
       - name: Release
         if: ${{ github.event_name != 'pull_request' }}
         uses: softprops/action-gh-release@v1
