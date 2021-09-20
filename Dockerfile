@@ -5,10 +5,9 @@ RUN yay-install intellij-idea-community-edition
 RUN yay-install spyder
 # From AUR
 RUN yay-install diffutils
-RUN pacman-key --keyserver hkp://keyserver.ubuntu.com -r 3056513887B78AEB 8A9E14A07010F7E3
+RUN pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 RUN pacman-key --lsign-key 3056513887B78AEB
-RUN pacman-key --lsign-key 8A9E14A07010F7E3
-COPY chaotic-aur-config /etc/pacman.d/chaotic-aur-config
+RUN pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 RUN cat /etc/pacman.d/chaotic-aur-config >> /etc/pacman.conf
 RUN yay -Syu --noconfirm && yay-install eclipse-java
 # System configuration
