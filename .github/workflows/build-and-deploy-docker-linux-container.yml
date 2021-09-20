@@ -44,7 +44,7 @@ jobs:
         run: docker push --all-tags $IMAGE_NAME
       - name: Run container
         if: ${{ github.event_name != 'pull_request' }}
-        run: docker run --name wsl --rm --net=host --env="DISPLAY" -v <WHERE_TO_LOCALLY_PERSIST>:/home/user --volume="$HOME/.Xauthority:/.Xauthority:rw" "$IMAGE_NAME:$VERSION"
+        run: docker run --name wsl --rm --net=host --env="DISPLAY" -v "$HOME:/home/user" --volume="$HOME/.Xauthority:/.Xauthority:rw" "$IMAGE_NAME:$VERSION"
       - name: Export container into tarball
         run: docker export --output="wsl.tar" wsl
       - name: Compress the tarball
