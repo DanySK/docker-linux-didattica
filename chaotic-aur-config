@@ -1,10 +1,3 @@
- 
+
 [chaotic-aur]
-# Germany
-Server = http://chaotic.bangl.de/$repo/$arch
-# Netherlands
-Server = https://chaotic.tn.dedyn.io/$arch
-# USA (Cloudflare cached)
-Server = https://repo.kitsuna.net/$arch
-# Brazil
-Server = http://lonewolf-builder.duckdns.org/$repo/$arch
+Include = /etc/pacman.d/chaotic-mirrorlist
