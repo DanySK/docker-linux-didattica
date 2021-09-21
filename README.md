@@ -34,6 +34,7 @@ docker run --rm "<WHERE_TO_LOCALLY_PERSIST>:/home/user" --volume="$HOME/.Xauthor
   * Cmd: `copy /b wsl.zstd.00 + wsl.zstd.01 + wsl.zstd.02 wsl.tar.zstd` (add all the downloaded files)
 * Decompress the tarball into a `wsl.tar` file
   * If you have [Z-standard](http://facebook.github.io/zstd/) installed, simply: `unzstd wsl.tar.zstd`
+  * If `unzstd` is not installed, but you have access to `zstd` or `zstd.exe`, run: `zstd -d wsl.tar.zstd`
   * If you prefer a graphical tool, check out [PeaZip](https://peazip.github.io/)
 * Import in WSL2 (replace `PATH_TO_THE_WLS_FILE_SYSTEM` with a valid path):
   * `wsl --import didattica PATH_TO_THE_WLS_FILE_SYSTEM wsl.tar --version 2`
