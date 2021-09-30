@@ -54,4 +54,33 @@ wsl -d didattica -u user zsh
 
 ## Run on Mac OS X
 
-TBD
+### Prerequisites
+
+0. Install Docker following the instructions provided [here](https://docs.docker.com/desktop/mac/install/)
+  - beware that Mac machines with Apple Chips require installing Rosetta first 
+
+1. Install [`xquartz`](https://www.xquartz.org/) from [Homebrew](https://brew.sh)
+  ```bash
+  brew install xquartz
+  ```
+
+2. Reboot your Mac after installing `xquartz`
+
+3. Start the XQuartz application 
+
+4. Open then preferences dialog of the XQuartz application, go to the _Security_ section, and enable the flag _Allow connections from network clients_, as depicted below (more details [here](https://techsparx.com/software-development/docker/display-x11-apps.html)):
+
+  ![XQuartz preferences dialog, security tab](https://techsparx.com/software-development/docker/img/xquartz-security.png)
+
+### Running the container
+
+1. Start XQuartz application
+
+2. Run the following commands in your shell
+  ```bash
+  export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+
+  xhost +$IP
+
+  docker run --rm --name linux-didattica --net=host -e "DISPLAY=$IP:0" -e XAUTHORITY=/.Xauthority -v <WHERE_TO_LOCALLY_PERSIST>:/home/user --volume="$HOME/.Xauthority:/.Xauthority:rw" -v /tmp/.X11-unix:/tmp/.X11-unix -it danysk/linux-didattica
+  ```
