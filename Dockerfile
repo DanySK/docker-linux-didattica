@@ -17,6 +17,8 @@ RUN eclipse -nosplash -application org.eclipse.equinox.p2.director\
  -repository http://download.eclipse.org/releases/2020-12/,\
 http://download.eclipse.org/releases/2021-03/,\
 http://download.eclipse.org/releases/2021-06/,\
+http://download.eclipse.org/releases/2021-09/,\
+http://download.eclipse.org/releases/2021-12/,\
 http://protelis-eclipse.surge.sh/,\
 http://www.acanda.ch/eclipse-pmd/release/latest/,\
 https://checkstyle.org/eclipse-cs-update-site/,\
