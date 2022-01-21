@@ -29,7 +29,7 @@ net.sf.eclipsecs.feature.group,\
 com.github.spotbugs.plugin.eclipse.feature.group
 # RUN yay-install xorg-xauth
 ENV XAUTHORITY=/.Xauthority
-CMD useradd user\
+ENTRYPOINT useradd user\
  && passwd -d user\
  && printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers\
  && cp -r /etc/skel/. /home/user\
@@ -37,3 +37,4 @@ CMD useradd user\
  && chmod 666 $XAUTHORITY\
  && cd /home/user/\
  && sudo -u user zsh
+CMD ["-c" "ls -ahl $HOME"]
