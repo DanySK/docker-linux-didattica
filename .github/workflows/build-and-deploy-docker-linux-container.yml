@@ -48,7 +48,7 @@ jobs:
         run: docker push --all-tags $IMAGE_NAME
       - name: Run container and export into tarball
         run: |
-          docker run --name wsl --net=host --env="DISPLAY" -v "$HOME:/home/user" --volume="$HOME/.Xauthority:/.Xauthority:rw" "$IMAGE_NAME:$VERSION"
+          docker run --name wsl --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/.Xauthority:rw" "$IMAGE_NAME:$VERSION"
           docker export --output="wsl.tar" wsl
       - name: Compress the tarball
         run: zstd --no-progress wsl.tar -o wsl.tar.zstd && rm wsl.tar

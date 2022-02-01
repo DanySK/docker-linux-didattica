@@ -27,14 +27,14 @@ https://spotbugs.github.io/eclipse/\
 ch.acanda.eclipse.pmd.feature.feature.group,\
 net.sf.eclipsecs.feature.group,\
 com.github.spotbugs.plugin.eclipse.feature.group
-# RUN yay-install xorg-xauth
+# User configuration
+COPY entrypoint /entrypoint
+RUN chmod +x /entrypoint
 ENV XAUTHORITY=/.Xauthority
-ENTRYPOINT useradd user\
- && passwd -d user\
- && printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers\
- && cp -r /etc/skel/. /home/user\
- && chown user /home/user\
- && chmod 666 $XAUTHORITY\
- && cd /home/user/\
- && sudo -u user zsh
-CMD ["-c" "ls -ahl $HOME"]
+RUN useradd -ms /bin/zsh user
+RUN passwd -d user
+RUN printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+USER user
+RUN sudo echo this is to avoid the 'We trust you have received blah blah blah print'
+WORKDIR /home/user
+ENTRYPOINT ["/entrypoint"]

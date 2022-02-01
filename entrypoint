@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+sudo chmod 666 $XAUTHORITY
+zsh "$@"
