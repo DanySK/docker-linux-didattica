@@ -1,4 +1,4 @@
-FROM danysk/docker-manjaro-programming-cli-tools:64.20220306.1202
+FROM danysk/docker-manjaro-programming-cli-tools:65.20220313.1433
 RUN pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
 RUN pacman-key --lsign-key FBA220DFC880C036
 RUN pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
