@@ -31,7 +31,7 @@ docker run --rm "<WHERE_TO_LOCALLY_PERSIST>:/home/user" --volume="$HOME/.Xauthor
 * Download the `*.tar.zstd.*` files from [the release page](https://github.com/DanySK/docker-linux-didattica/releases)
 * Join them back into a single compressed archive:
   * Bash (requires a UNIX-like shell: `sh`, `bash`, `zsh`, `fish`... won't work on Powershell or Cmd): `cat *.tar.zstd.* > wsl.tar.zstd`
-  * Cmd: `copy /b wsl.zstd.00 + wsl.zstd.01 + wsl.zstd.02 wsl.tar.zstd` (add all the downloaded files)
+  * Cmd: `copy /b wsl.tar.zstd.00 + wsl.tar.zstd.01 + wsl.tar.zstd.02 wsl.tar.zstd` (add all the downloaded files)
 * Decompress the tarball into a `wsl.tar` file
   * If you have [Z-standard](http://facebook.github.io/zstd/) installed, simply: `unzstd wsl.tar.zstd`
   * If `unzstd` is not installed, but you have access to `zstd` or `zstd.exe`, run: `zstd -d wsl.tar.zstd`
