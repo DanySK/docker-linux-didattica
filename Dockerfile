@@ -6,13 +6,8 @@ COPY chaotic-aur-config chaotic-aur-config
 RUN cat chaotic-aur-config >> /etc/pacman.conf
 RUN rm chaotic-aur-config
 RUN yay-install gradle
-RUN yay-install code
+RUN yay-install visual-studio-code-bin
 RUN yay-install intellij-idea-community-edition
-RUN code --install-extension redhat.java
-RUN code --install-extension vscjava.vscode-gradle
-RUN code --install-extension mathiasfrohlich.Kotlin
-RUN code --install-extension ms-azuretools.vscode-docker
-RUN code --install-extension ms-python.python
 # From AUR
 RUN yay-install diffutils
 # RUN yay -Syu --noconfirm && yay-install eclipse-java
@@ -39,6 +34,11 @@ RUN useradd -ms /bin/zsh user
 RUN passwd -d user
 RUN printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
 USER user
+RUN code --install-extension redhat.java
+RUN code --install-extension vscjava.vscode-gradle
+RUN code --install-extension mathiasfrohlich.Kotlin
+RUN code --install-extension ms-azuretools.vscode-docker
+RUN code --install-extension ms-python.python
 RUN sudo echo this is to avoid the 'We trust you have received blah blah blah print'
 WORKDIR /home/user
 ENTRYPOINT ["/entrypoint"]
