@@ -1,4 +1,4 @@
-FROM danysk/docker-manjaro-programming-cli-tools:241.20240311.2131
+FROM danysk/docker-manjaro-programming-cli-tools:243.20240312.1543
 RUN pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 RUN pacman-key --lsign-key 3056513887B78AEB
 RUN pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
