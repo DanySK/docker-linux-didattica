@@ -11,6 +11,7 @@ So I adopted docker
 ## Run on linux
 
 ```bash
+xhost "+local:*"
 docker pull danysk/linux-didattica
 docker run --rm --net=host --env="DISPLAY" -v <WHERE_TO_LOCALLY_PERSIST>:/home/user --volume="$HOME/.Xauthority:/.Xauthority:rw" -it danysk/linux-didattica
 ```
@@ -57,7 +58,7 @@ wsl -d didattica -u user zsh
 ### Prerequisites
 
 0. Install Docker following the instructions provided [here](https://docs.docker.com/desktop/mac/install/)
-  - beware that Mac machines with Apple Chips require installing Rosetta first 
+  - beware that Mac machines with Apple Chips require installing Rosetta first
 
 1. Install [`xquartz`](https://www.xquartz.org/) from [Homebrew](https://brew.sh)
   ```bash
@@ -66,7 +67,7 @@ wsl -d didattica -u user zsh
 
 2. Reboot your Mac after installing `xquartz`
 
-3. Start the XQuartz application 
+3. Start the XQuartz application
 
 4. Open then preferences dialog of the XQuartz application, go to the _Security_ section, and enable the flag _Allow connections from network clients_, as depicted below (more details [here](https://techsparx.com/software-development/docker/display-x11-apps.html)):
 

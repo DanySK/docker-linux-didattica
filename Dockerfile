@@ -1,15 +1,10 @@
-FROM danysk/docker-manjaro-programming-cli-tools:253.20240509.1717
-RUN pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-RUN pacman-key --lsign-key 3056513887B78AEB
-RUN pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-COPY chaotic-aur-config chaotic-aur-config
-RUN cat chaotic-aur-config >> /etc/pacman.conf
-RUN rm chaotic-aur-config
-RUN yay-install gradle
-RUN yay-install visual-studio-code-bin
-RUN yay-install intellij-idea-community-edition
+FROM danysk/manjaro-programming-cli-tools:303.20240930.1047
+USER root
+RUN pamac install --no-confirm gradle
+RUN pamac install --no-confirm visual-studio-code-bin
+RUN pamac install --no-confirm intellij-idea-community-edition
 # From AUR
-RUN yay-install diffutils
+RUN pamac install --no-confirm diffutils
 # RUN yay -Syu --noconfirm && yay-install eclipse-java
 # # System configuration
 # RUN eclipse -nosplash -application org.eclipse.equinox.p2.director\
@@ -30,11 +25,8 @@ RUN yay-install diffutils
 COPY entrypoint /entrypoint
 RUN chmod +x /entrypoint
 ENV XAUTHORITY=/.Xauthority
-RUN useradd -ms /bin/zsh user
-RUN passwd -d user
-RUN printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
 USER user
-RUN code --install-extension redhat.java
+RUN code --install-extension vscjava.vscode-java-pack
 RUN code --install-extension vscjava.vscode-gradle
 RUN code --install-extension mathiasfrohlich.Kotlin
 RUN code --install-extension ms-azuretools.vscode-docker
