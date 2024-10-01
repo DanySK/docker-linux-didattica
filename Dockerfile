@@ -1,12 +1,21 @@
-FROM danysk/manjaro-programming-cli-tools:303.20240930.1047
+FROM danysk/manjaro-programming-cli-tools:304.20241001.1545
+USER build
+
+RUN paru -Sy\
+    diffutils\
+    intellij-idea-community-edition\
+    intellij-idea-community-edition-jre\
+    visual-studio-code-bin\
+    --noconfirm
+RUN paru -Sccd --noconfirm
+
 USER root
-RUN pamac install --no-confirm gradle
-RUN pamac install --no-confirm visual-studio-code-bin
-RUN pamac install --no-confirm intellij-idea-community-edition
-# From AUR
-RUN pamac install --no-confirm diffutils
-# RUN yay -Syu --noconfirm && yay-install eclipse-java
-# # System configuration
+COPY entrypoint /entrypoint
+RUN sudo chmod +x /entrypoint
+ENV XAUTHORITY=/.Xauthority
+ENTRYPOINT ["/entrypoint"]
+
+USER user
 # RUN eclipse -nosplash -application org.eclipse.equinox.p2.director\
 #  -repository http://download.eclipse.org/releases/2020-12/,\
 # http://download.eclipse.org/releases/2021-03/,\
@@ -21,11 +30,6 @@ RUN pamac install --no-confirm diffutils
 # ch.acanda.eclipse.pmd.feature.feature.group,\
 # net.sf.eclipsecs.feature.group,\
 # com.github.spotbugs.plugin.eclipse.feature.group
-# User configuration
-COPY entrypoint /entrypoint
-RUN chmod +x /entrypoint
-ENV XAUTHORITY=/.Xauthority
-USER user
 RUN code --install-extension vscjava.vscode-java-pack
 RUN code --install-extension vscjava.vscode-gradle
 RUN code --install-extension mathiasfrohlich.Kotlin
@@ -33,4 +37,3 @@ RUN code --install-extension ms-azuretools.vscode-docker
 RUN code --install-extension ms-python.python
 RUN sudo echo this is to avoid the 'We trust you have received blah blah blah print'
 WORKDIR /home/user
-ENTRYPOINT ["/entrypoint"]
