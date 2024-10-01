@@ -10,6 +10,7 @@ RUN paru -Sy\
 RUN paru -Sccd --noconfirm
 
 USER root
+RUN paccache -rk 0
 COPY entrypoint /entrypoint
 RUN sudo chmod +x /entrypoint
 ENV XAUTHORITY=/.Xauthority
