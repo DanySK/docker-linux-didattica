@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Maximize build space
-        uses: easimon/maximize-build-space@v10
+        uses: AdityaGarg8/remove-unwanted-software@v4.1
         with:
-          root-reserve-mb: 51200
+          remove-cached-tools: 'true'
           remove-codeql: 'true'
           remove-dotnet: 'true'
           remove-android: 'true'
