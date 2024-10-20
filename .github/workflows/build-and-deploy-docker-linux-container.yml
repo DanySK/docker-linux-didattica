@@ -10,7 +10,7 @@ on:
       - 'renovate.json'
 
 jobs:
-  Build-And-Deploy-Container:
+  success:
     runs-on: ubuntu-latest
     steps:
       - name: Maximize build space
