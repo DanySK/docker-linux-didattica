@@ -3,13 +3,13 @@ USER build
 
 RUN paru -Sy\
     diffutils\
-    intellij-idea-community-edition\
     intellij-idea-community-edition-jre\
     visual-studio-code-bin\
     --noconfirm
 RUN paru -Sccd --noconfirm
 
 USER root
+RUN ln -s /usr/sbin/idea-ce /usr/sbin/idea
 RUN paccache -rk 0
 COPY entrypoint /entrypoint
 RUN sudo chmod +x /entrypoint
