@@ -1,4 +1,4 @@
-FROM danysk/manjaro-programming-cli-tools:339.20250408.2049
+FROM danysk/manjaro-programming-cli-tools:340.20250415.1356
 USER build
 
 RUN paru -Sy\
