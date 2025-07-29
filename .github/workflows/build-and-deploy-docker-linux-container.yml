@@ -8,6 +8,7 @@ on:
     paths-ignore:
       - 'README.md'
       - 'renovate.json'
+  workflow_dispatch:
 
 jobs:
   success:
