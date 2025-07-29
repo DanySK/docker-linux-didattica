@@ -2,6 +2,11 @@ FROM danysk/manjaro-programming-cli-tools:343.20250506.1521
 USER build
 
 RUN paru -Sy\
+    archlinux-keyring\
+    chaotic-keyring\
+    manjaro-keyring\
+    --noconfirm
+RUN paru -Sy\
     diffutils\
     intellij-idea-community-edition-jre\
     visual-studio-code-bin\
