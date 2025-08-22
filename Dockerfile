@@ -21,6 +21,7 @@ COPY entrypoint /entrypoint
 RUN sudo chmod +x /entrypoint
 ENV XAUTHORITY=/.Xauthority
 ENTRYPOINT ["/entrypoint"]
+RUN chsh -s /bin/zsh user
 
 USER user
 # RUN eclipse -nosplash -application org.eclipse.equinox.p2.director\
