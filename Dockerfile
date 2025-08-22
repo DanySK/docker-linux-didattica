@@ -1,4 +1,5 @@
 FROM danysk/manjaro-programming-cli-tools:355.20250817.2150
+COPY wsl.conf /etc/wsl.conf
 USER build
 
 RUN paru -Sy\
