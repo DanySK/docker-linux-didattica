@@ -1,4 +1,4 @@
-FROM danysk/manjaro-programming-cli-tools:358.20251118.0317
+FROM danysk/manjaro-programming-cli-tools:359.20251120.1634
 COPY wsl.conf /etc/wsl.conf
 USER build
 
