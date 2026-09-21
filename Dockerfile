@@ -15,7 +15,6 @@ RUN paru -Sy\
 RUN paru -Sccd --noconfirm
 
 USER root
-RUN ln -s /usr/sbin/idea-ce /usr/sbin/idea
 RUN paccache -rk 0
 COPY entrypoint /entrypoint
 RUN sudo chmod +x /entrypoint
