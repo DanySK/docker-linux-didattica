@@ -9,7 +9,7 @@ RUN paru -Sy\
     --noconfirm
 RUN paru -Sy\
     diffutils\
-    intellij-idea-community-edition-jre\
+    intellij-idea-community-edition\
     visual-studio-code-bin\
     --noconfirm
 RUN paru -Sccd --noconfirm
